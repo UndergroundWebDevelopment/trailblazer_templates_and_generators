@@ -5,10 +5,6 @@ git add: ".", commit: %(-m "Initial Commit")
 gem 'trailblazer', github: 'apotonick/trailblazer'
 gem 'trailblazer-rails'
 
-# Responders adds support for respond_with and separate responder classes to
-# handle different request formats:
-gem 'responders'
-
 # Roar provides representers which can parse and render API documents (e.g. 
 # JSON, XML, JSON-API) from models:
 gem 'roar-rails'
@@ -52,8 +48,13 @@ db: bin/local_postgres
 web: rails server Puma
 CODE
 
+application <<-CODE
+  config.generators.stylesheets = false
+  config.generators.javascripts = false
+  config.generators.helper      = false
+CODE
+
 after_bundle do
-  generate 'responders:install'
   generate 'rspec:install'
 
   # Initial Migrations:
